@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use App\Provider\RegionProvider;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegisterType extends AbstractType
 {
@@ -30,7 +32,7 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('legalStatus', ChoiceType::class, [
+            ->add('status', ChoiceType::class, [
                 'choices' => [
                     'klient indywidualny' => 'customer',
                     'Firma' => 'company'
@@ -48,6 +50,7 @@ class RegisterType extends AbstractType
             ->add('fullName', TextType::class, [
                 'label' => 'Imię i nazwisko: ',
                 'row_attr' => ['id' => 'fullName'],
+                'required' => false,
             ])
             ->add('address', TextType::class, [
                 'label' => 'Ulica, nr domu: ',
@@ -74,16 +77,26 @@ class RegisterType extends AbstractType
             ->add('pesel', NumberType::class, [
                 'label' => 'Pesel: ',
                 'row_attr' => ['id' => 'pesel'],
+                'required' => false,
             ])
             ->add('companyName', TextType::class, [
                 'label' => 'Firma: ',
                 'row_attr' => ['id' => 'companyName', 'style' => 'display: none'],
+                'required' => false,
             ])
             ->add('nip', TextType::class, [
                 'label' => 'Nip: ',
                 'row_attr' => ['id' => 'nip', 'style' => 'display: none'],
+                'required' => false,
             ])
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Client::class,
+        ]);
     }
 
 }
