@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Wartość</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>{{client.id}}</td>
+        </tr>
+        {% if client.fullName != null %}
+        <tr>
+            <td>Imię i nazwisko</td>
+            <td>{{client.fullName}}</td>
+        </tr>
+        {% else %}
+            <tr>
+                <td>Nazwa firmy</td>
+                <td>{{client.companyName}}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td>Adres</td>
+            <td>{{client.address}}</td>
+        </tr>
+        <tr>
+            <td>Miasto</td>
+            <td>{{client.city}}</td>
+        </tr>
+        <tr>
+            <td>Województwo</td>
+            <td>{{client.region}}</td>
+        </tr>
+        <tr>
+            <td>Numer telefonu</td>
+            <td>{{client.mobile}}</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{client.email}}</td>
+        </tr>
+        {% if client.pesel != null %}
+            <tr>
+                <td>Pesel</td>
+                <td>{{client.pesel}}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>Nip</td>
+                <td>{{client.nip}}</td>
+            </tr>
+        {% endif %}
+    </tbody>
+    </table>
+{% endblock %}
