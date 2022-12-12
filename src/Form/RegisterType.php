@@ -16,9 +16,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use App\Provider\RegionProvider;
 
 class RegisterType extends AbstractType
 {
+    private $regionProvider;
+
+    public function __construct(RegionProvider $regionProvider)
+    {
+        $this->regionProvider = $regionProvider;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -48,11 +56,14 @@ class RegisterType extends AbstractType
                 'label' => 'Miejscowość, kod pocztowy: ',
             ])
             ->add('region', ChoiceType::class, [
-                'choices' => [
-                    'Pomorskie' => '1',
-                    'Mazowieckie' => '2',
-                ],
-                'label' => 'Województwo: '
+                'choices' => $this->regionProvider->deserializeRegion(),
+                'label' => 'Województwo: ',
+                'choice_value' => function ($value) {
+                 return $value;
+                },
+                'choice_label' => function ($value) {
+                    return $value;
+                }
             ])
             ->add('mobile', TelType::class, [
                 'label' => 'Telefon: ',
