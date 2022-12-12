@@ -14,25 +14,17 @@
     {{ form_end(form) }}
 
     <script>
-        function toggleClock() {
-                var input = document.getElementById('register_legalStatus');
-                var fullName = document.getElementById('fullName');
-                var pesel = document.getElementById('pesel');
-                var companyName = document.getElementById('companyName');
-                var nip = document.getElementById('nip');
-                if (input.value === "customer") {
-                    fullName.style.display = ''
-                    pesel.style.display = ''
-                    companyName.style.display = 'none'
-                    nip.style.display = 'none'
-                } else {
-                    fullName.style.display = 'none'
-                    pesel.style.display = 'none'
-                    companyName.style.display = ''
-                    nip.style.display = ''
-                }
+        function showCustomer(str){
+            document.getElementById('fullName').style.display = 'block';
+            document.getElementById('pesel').style.display = 'block';
+            document.getElementById('companyName').style.display = 'none';
+            document.getElementById('nip').style.display = 'none';
+        }
+        function showCompany(sign){
+            document.getElementById('fullName').style.display = 'none';
+            document.getElementById('pesel').style.display = 'none';
+            document.getElementById('companyName').style.display = 'block';
+            document.getElementById('nip').style.display = 'block';
         }
     </script>
-{% endblock %}
-{% block javascripts %}
 {% endblock %}

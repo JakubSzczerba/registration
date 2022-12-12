@@ -27,6 +27,10 @@ class RegisterType extends AbstractType
                     'klient indywidualny' => 'customer',
                     'Firma' => 'company'
                 ],
+                'choice_attr' => [
+                    'klient indywidualny' => ['onchange' => 'showCustomer()'],
+                    'Firma' => ['onchange' => 'showCompany()'],
+                ],
                 'label' => 'Status prawny: ',
                 'data' => 'customer',
                 'expanded' => true,
